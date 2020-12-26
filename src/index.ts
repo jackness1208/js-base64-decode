@@ -32,14 +32,11 @@ export class Base64 {
     }
   }
 
-  async decode(ctx: string) {
+  async decode<R = any>(ctx: string): Promise<R> {
     const { json } = this
-    if (!ctx) {
-      return ctx
-    }
     let r = await this.storage?.getItem(ctx)
     if (r) {
-      return r
+      return r as R
     } else {
       if (this.worker) {
         // TODO:
@@ -54,7 +51,7 @@ export class Base64 {
           r = ''
         }
       }
-      return r
+      return r as R
     }
   }
 }
