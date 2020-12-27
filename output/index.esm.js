@@ -179,13 +179,15 @@ var Base64 = /** @class */ (function () {
         }
         this.storage = new IndexDBStorage({ name: this.webdb });
         if (WOEKER_SUPPORTED) {
-            this.worker = new Worker(URL.createObjectURL(new Blob([workerString], { type: 'application/javascript' })));
+            this.worker = new Worker(URL.createObjectURL(new Blob([workerString], { type: 'application/javascript' })), {
+                name: 'base64-decode'
+            });
         }
     }
     Base64.prototype.decode = function (ctx) {
         var _a, _b, _c;
         return __awaiter(this, void 0, void 0, function () {
-            var json, r, er_1;
+            var json, r;
             var _this = this;
             return __generator(this, function (_d) {
                 switch (_d.label) {
@@ -198,12 +200,15 @@ var Base64 = /** @class */ (function () {
                         return [2 /*return*/, r];
                     case 2:
                         if (!this.worker) return [3 /*break*/, 5];
-                        return [4 /*yield*/, new Promise(function (resolve) {
+                        return [4 /*yield*/, new Promise(function (resolve, reject) {
                                 if (_this.worker) {
                                     _this.worker.onmessage = function (e) {
                                         resolve(e.data);
                                     };
                                     _this.worker.postMessage(ctx);
+                                    _this.worker.onerror = function (er) {
+                                        reject(er);
+                                    };
                                 }
                             })];
                     case 3:
@@ -214,9 +219,8 @@ var Base64 = /** @class */ (function () {
                         return [4 /*yield*/, ((_b = this.storage) === null || _b === void 0 ? void 0 : _b.setItem(ctx, r))];
                     case 4:
                         _d.sent();
-                        return [3 /*break*/, 8];
+                        return [3 /*break*/, 7];
                     case 5:
-                        _d.trys.push([5, 7, , 8]);
                         r = decode(ctx);
                         if (json) {
                             r = JSON.parse(r);
@@ -224,12 +228,8 @@ var Base64 = /** @class */ (function () {
                         return [4 /*yield*/, ((_c = this.storage) === null || _c === void 0 ? void 0 : _c.setItem(ctx, r))];
                     case 6:
                         _d.sent();
-                        return [3 /*break*/, 8];
-                    case 7:
-                        er_1 = _d.sent();
-                        r = '';
-                        return [3 /*break*/, 8];
-                    case 8: return [2 /*return*/, r];
+                        _d.label = 7;
+                    case 7: return [2 /*return*/, r];
                 }
             });
         });

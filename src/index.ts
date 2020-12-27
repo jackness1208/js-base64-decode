@@ -36,7 +36,10 @@ export class Base64 {
 
     if (WOEKER_SUPPORTED) {
       this.worker = new Worker(
-        URL.createObjectURL(new Blob([workerString], { type: 'application/javascript' }))
+        URL.createObjectURL(new Blob([workerString], { type: 'application/javascript' })),
+        {
+          name: 'base64-decode'
+        }
       )
     }
   }
@@ -48,12 +51,15 @@ export class Base64 {
       return r as R
     } else {
       if (this.worker) {
-        r = await new Promise((resolve) => {
+        r = await new Promise((resolve, reject) => {
           if (this.worker) {
             this.worker.onmessage = (e) => {
               resolve(e.data)
             }
             this.worker.postMessage(ctx)
+            this.worker.onerror = (er) => {
+              reject(er)
+            }
           }
         })
         if (json) {
@@ -62,15 +68,11 @@ export class Base64 {
 
         await this.storage?.setItem(ctx, r)
       } else {
-        try {
-          r = decode(ctx)
-          if (json) {
-            r = JSON.parse(r)
-          }
-          await this.storage?.setItem(ctx, r)
-        } catch (er) {
-          r = ''
+        r = decode(ctx)
+        if (json) {
+          r = JSON.parse(r)
         }
+        await this.storage?.setItem(ctx, r)
       }
       return r as R
     }
