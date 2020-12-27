@@ -3,7 +3,10 @@ import typescript from 'rollup-plugin-typescript2'
 import commonjs from 'rollup-plugin-commonjs'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import json from 'rollup-plugin-json'
+import fs from 'fs'
 import { terser } from 'rollup-plugin-terser'
+import replace from '@rollup/plugin-replace'
+import buble from '@rollup/plugin-buble'
 
 function buildBanner(type) {
   return [
@@ -21,17 +24,43 @@ const config = {
   input: './src/index.ts',
   output: [],
   plugins: [
+    // replace({
+    //   __workerScript__: () => {
+    //     // return 'sb'
+    //     return fs.readFileSync('./output/index.js').toString()
+    //   }
+    // }),
     nodeResolve({ jsnext: true }),
-    commonjs(),
+    commonjs({
+      include: 'node_modules/**'
+    }),
     json(),
     typescript({
       typescript: require('typescript')
     })
   ],
-  external: ['@yy/allblue-qiankun', 'fetch-polyfill']
+  external: ['indexdb-storage']
 }
 
 export default [
+  {
+    input: './src/worker.ts',
+    output: [
+      {
+        file: './output/worker.js',
+        format: 'commonjs',
+        exports: 'named',
+        sourcemap: false
+      }
+    ],
+    plugins: config.plugins.concat([
+      terser({
+        compress: {
+          passes: 2
+        }
+      })
+    ])
+  },
   {
     input: config.input,
     output: [

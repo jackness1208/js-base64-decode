@@ -38,6 +38,7 @@
     "install:test": "cd ./test/case/base && yarn install"
   },
   "devDependencies": {
+    "@rollup/plugin-replace": "^2.3.4",
     "cross-env": "^5.2.0",
     "eslint": "^6.8.0",
     "eslint-config-yyl-react": "^0.1.9",
@@ -57,6 +58,7 @@
   "author": "liudaojie <liudaojie@yy.com>",
   "license": "MIT",
   "dependencies": {
+    "@rollup/plugin-buble": "^0.21.3",
     "indexdb-storage": "^0.1.1",
     "js-base64": "^3.6.0"
   }

@@ -1,13 +1,9 @@
 /*!
- * js-base64-decode cjs 0.1.0
+ * js-base64-decode esm 0.1.0
  * (c) 2020 - 2020 jackness
  * Released under the MIT License.
  */
-'use strict';
-
-Object.defineProperty(exports, '__esModule', { value: true });
-
-var indexdbStorage = require('indexdb-storage');
+import { IndexDBStorage } from 'indexdb-storage';
 
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
@@ -181,7 +177,7 @@ var Base64 = /** @class */ (function () {
         if (json !== undefined) {
             this.json = json;
         }
-        this.storage = new indexdbStorage.IndexDBStorage({ name: this.webdb });
+        this.storage = new IndexDBStorage({ name: this.webdb });
         if (WOEKER_SUPPORTED) {
             console.log(workerString);
             // TODO: init worker
@@ -225,4 +221,4 @@ var Base64 = /** @class */ (function () {
     return Base64;
 }());
 
-exports.Base64 = Base64;
+export { Base64 };
