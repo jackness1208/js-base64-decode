@@ -3128,6 +3128,11 @@ imurmurhash@^0.1.4:
   resolved "https://registry.yarnpkg.com/imurmurhash/-/imurmurhash-0.1.4.tgz#9218b9b2b928a238b13dc4fb6b6d576f231453ea"
   integrity sha1-khi5srkoojixPcT7a21XbyMUU+o=
 
+indexdb-storage@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/indexdb-storage/-/indexdb-storage-0.1.1.tgz#33f017f55124135e67eb547a6c8936e9d2363f47"
+  integrity sha512-FzR7asenEFxmHYPnxFA7RBnsq57Tfq9Y0gFD80xiZy38lv1R+4O5PtiPGw3DGpGYKFSjDPSZ8sXqZR+F1EgETQ==
+
 indexes-of@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/indexes-of/-/indexes-of-1.0.1.tgz#f30f716c8e2bd346c7b67d3df3915566a7c05607"

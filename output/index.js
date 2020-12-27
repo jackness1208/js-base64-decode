@@ -166,8 +166,8 @@ const _unURI = (a) => _tidyB64(a.replace(/[-_]/g, (m0) => m0 == '-' ? '+' : '/')
 const decode = (src) => _decode(_unURI(src));
 
 // eslint-disable-next-line no-useless-escape
-var workerString = "\"use strict\";const e=\"function\"==typeof atob,r=\"function\"==typeof Buffer,t=\"function\"==typeof TextDecoder?new TextDecoder:void 0,a=(\"function\"==typeof TextEncoder&&new TextEncoder,[...\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=\"]),o=(e=>{let r={};return a.forEach((e,t)=>r[e]=t),r})(),n=/^(?:[A-Za-zd+/]{4})*?(?:[A-Za-zd+/]{2}(?:==)?|[A-Za-zd+/]{3}=?)?$/,c=String.fromCharCode.bind(String),f=\"function\"==typeof Uint8Array.from?Uint8Array.from.bind(Uint8Array):(e,r=(e=>e))=>new Uint8Array(Array.prototype.slice.call(e,0).map(r)),d=e=>e.replace(/[^A-Za-z0-9+/]/g,\"\"),i=/[\u00C0-\u00DF][\u0080-\u00BF]|[\u00E0-\u00EF][\u0080-\u00BF]{2}|[\u00F0-\u00F7][\u0080-\u00BF]{3}/g,A=e=>{switch(e.length){case 4:var r=((7&e.charCodeAt(0))<<18|(63&e.charCodeAt(1))<<12|(63&e.charCodeAt(2))<<6|63&e.charCodeAt(3))-65536;return c(55296+(r>>>10))+c(56320+(1023&r));case 3:return c((15&e.charCodeAt(0))<<12|(63&e.charCodeAt(1))<<6|63&e.charCodeAt(2));default:return c((31&e.charCodeAt(0))<<6|63&e.charCodeAt(1))}},h=e?e=>atob(d(e)):r?e=>Buffer.from(e,\"base64\").toString(\"binary\"):e=>{if(e=e.replace(/s+/g,\"\"),!n.test(e))throw new TypeError(\"malformed base64.\");e+=\"==\".slice(2-(3&e.length));let r,t,a,f=\"\";for(let n=0;n<e.length;)r=o[e.charAt(n++)]<<18|o[e.charAt(n++)]<<12|(t=o[e.charAt(n++)])<<6|(a=o[e.charAt(n++)]),f+=64===t?c(r>>16&255):64===a?c(r>>16&255,r>>8&255):c(r>>16&255,r>>8&255,255&r);return f},s=r?e=>f(Buffer.from(e,\"base64\")):e=>f(h(e),e=>e.charCodeAt(0)),u=r?e=>Buffer.from(e,\"base64\").toString(\"utf8\"):t?e=>t.decode(s(e)):e=>h(e).replace(i,A);var l=self;l.addEventListener(\"message\",(function(e){var r;l.postMessage((r=e.data,u(d(r.replace(/[-_]/g,e=>\"-\"==e?\"+\":\"/\")))))}));\n\n";
-var WOEKER_SUPPORTED = typeof Worker !== 'undefined';
+var workerString = "\"use strict\";const e=\"function\"==typeof atob,r=\"function\"==typeof Buffer,t=\"function\"==typeof TextDecoder?new TextDecoder:void 0,a=(\"function\"==typeof TextEncoder&&new TextEncoder,[...\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=\"]),o=(e=>{let r={};return a.forEach((e,t)=>r[e]=t),r})(),n=/^(?:[A-Za-zd+/]{4})*?(?:[A-Za-zd+/]{2}(?:==)?|[A-Za-zd+/]{3}=?)?$/,c=String.fromCharCode.bind(String),f=\"function\"==typeof Uint8Array.from?Uint8Array.from.bind(Uint8Array):(e,r=(e=>e))=>new Uint8Array(Array.prototype.slice.call(e,0).map(r)),d=e=>e.replace(/[^A-Za-z0-9+/]/g,\"\"),i=/[\u00C0-\u00DF][\u0080-\u00BF]|[\u00E0-\u00EF][\u0080-\u00BF]{2}|[\u00F0-\u00F7][\u0080-\u00BF]{3}/g,A=e=>{switch(e.length){case 4:var r=((7&e.charCodeAt(0))<<18|(63&e.charCodeAt(1))<<12|(63&e.charCodeAt(2))<<6|63&e.charCodeAt(3))-65536;return c(55296+(r>>>10))+c(56320+(1023&r));case 3:return c((15&e.charCodeAt(0))<<12|(63&e.charCodeAt(1))<<6|63&e.charCodeAt(2));default:return c((31&e.charCodeAt(0))<<6|63&e.charCodeAt(1))}},h=e?e=>atob(d(e)):r?e=>Buffer.from(e,\"base64\").toString(\"binary\"):e=>{if(e=e.replace(/s+/g,\"\"),!n.test(e))throw new TypeError(\"malformed base64.\");e+=\"==\".slice(2-(3&e.length));let r,t,a,f=\"\";for(let n=0;n<e.length;)r=o[e.charAt(n++)]<<18|o[e.charAt(n++)]<<12|(t=o[e.charAt(n++)])<<6|(a=o[e.charAt(n++)]),f+=64===t?c(r>>16&255):64===a?c(r>>16&255,r>>8&255):c(r>>16&255,r>>8&255,255&r);return f},s=r?e=>f(Buffer.from(e,\"base64\")):e=>f(h(e),e=>e.charCodeAt(0)),u=r?e=>Buffer.from(e,\"base64\").toString(\"utf8\"):t?e=>t.decode(s(e)):e=>h(e).replace(i,A);var l=self;l.addEventListener(\"message\",(function(e){var r;l.postMessage((r=e.data,u(d(r.replace(/[-_]/g,e=>\"-\"==e?\"+\":\"/\")))))}));\n";
+var WOEKER_SUPPORTED = typeof Worker !== 'undefined' && typeof URL !== 'undefined';
 var Base64 = /** @class */ (function () {
     function Base64(option) {
         /** webdb 名称 */
@@ -183,41 +183,57 @@ var Base64 = /** @class */ (function () {
         }
         this.storage = new indexdbStorage.IndexDBStorage({ name: this.webdb });
         if (WOEKER_SUPPORTED) {
-            console.log(workerString);
-            // TODO: init worker
+            this.worker = new Worker(URL.createObjectURL(new Blob([workerString], { type: 'application/javascript' })));
         }
     }
     Base64.prototype.decode = function (ctx) {
-        var _a, _b;
+        var _a, _b, _c;
         return __awaiter(this, void 0, void 0, function () {
             var json, r, er_1;
-            return __generator(this, function (_c) {
-                switch (_c.label) {
+            var _this = this;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
                     case 0:
                         json = this.json;
                         return [4 /*yield*/, ((_a = this.storage) === null || _a === void 0 ? void 0 : _a.getItem(ctx))];
                     case 1:
-                        r = _c.sent();
+                        r = _d.sent();
                         if (!r) return [3 /*break*/, 2];
                         return [2 /*return*/, r];
                     case 2:
-                        if (!this.worker) return [3 /*break*/, 3];
-                        return [3 /*break*/, 6];
+                        if (!this.worker) return [3 /*break*/, 5];
+                        return [4 /*yield*/, new Promise(function (resolve) {
+                                if (_this.worker) {
+                                    _this.worker.onmessage = function (e) {
+                                        resolve(e.data);
+                                    };
+                                    _this.worker.postMessage(ctx);
+                                }
+                            })];
                     case 3:
-                        _c.trys.push([3, 5, , 6]);
-                        r = decode(ctx);
+                        r = _d.sent();
                         if (json) {
                             r = JSON.parse(r);
                         }
                         return [4 /*yield*/, ((_b = this.storage) === null || _b === void 0 ? void 0 : _b.setItem(ctx, r))];
                     case 4:
-                        _c.sent();
-                        return [3 /*break*/, 6];
+                        _d.sent();
+                        return [3 /*break*/, 8];
                     case 5:
-                        er_1 = _c.sent();
+                        _d.trys.push([5, 7, , 8]);
+                        r = decode(ctx);
+                        if (json) {
+                            r = JSON.parse(r);
+                        }
+                        return [4 /*yield*/, ((_c = this.storage) === null || _c === void 0 ? void 0 : _c.setItem(ctx, r))];
+                    case 6:
+                        _d.sent();
+                        return [3 /*break*/, 8];
+                    case 7:
+                        er_1 = _d.sent();
                         r = '';
-                        return [3 /*break*/, 6];
-                    case 6: return [2 /*return*/, r];
+                        return [3 /*break*/, 8];
+                    case 8: return [2 /*return*/, r];
                 }
             });
         });
