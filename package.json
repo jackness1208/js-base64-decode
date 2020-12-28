@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "output/index.js",
   "module": "output/index.esm.js",
   "types": "output/index.d.ts",
@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@rollup/plugin-replace": "^2.3.4",
+    "@rollup/plugin-buble": "^0.21.3",
     "cross-env": "^5.2.0",
     "eslint": "^6.8.0",
     "eslint-config-yyl-react": "^0.1.9",
@@ -50,7 +51,8 @@
     "rollup-plugin-terser": "^5.3.0",
     "rollup-plugin-typescript2": "^0.20.1",
     "typescript": "^3.8.3",
-    "yyl-release": "0.1.0"
+    "yyl-release": "0.1.0",
+    "js-base64": "^3.6.0"
   },
   "name": "js-base64-decode",
   "description": "base64 decode with webdb and webworker",
@@ -58,8 +60,6 @@
   "author": "liudaojie <liudaojie@yy.com>",
   "license": "MIT",
   "dependencies": {
-    "@rollup/plugin-buble": "^0.21.3",
-    "indexdb-storage": "^0.1.1",
-    "js-base64": "^3.6.0"
+    "indexdb-storage": "^0.1.1"
   }
 }

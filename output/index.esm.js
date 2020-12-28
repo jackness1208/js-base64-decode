@@ -1,5 +1,5 @@
 /*!
- * js-base64-decode esm 0.1.0
+ * js-base64-decode esm 0.1.1
  * (c) 2020 - 2020 jackness
  * Released under the MIT License.
  */
