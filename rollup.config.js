@@ -3,9 +3,7 @@ import typescript from 'rollup-plugin-typescript2'
 import commonjs from 'rollup-plugin-commonjs'
 import nodeResolve from 'rollup-plugin-node-resolve'
 import json from 'rollup-plugin-json'
-import fs from 'fs'
 import { terser } from 'rollup-plugin-terser'
-import replace from '@rollup/plugin-replace'
 import buble from '@rollup/plugin-buble'
 
 function buildBanner(type) {
@@ -37,7 +35,8 @@ const config = {
     json(),
     typescript({
       typescript: require('typescript')
-    })
+    }),
+    buble()
   ],
   external: ['indexdb-storage']
 }

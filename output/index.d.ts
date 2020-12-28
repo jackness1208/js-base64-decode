@@ -1,6 +1,7 @@
+import { IndexDBStorageOption } from 'indexdb-storage';
 export interface Base64Option {
     /** webdb 名称 */
-    webdb?: string;
+    webdb?: IndexDBStorageOption;
     /** 是否需要转 json */
     json?: boolean;
 }

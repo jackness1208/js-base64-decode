@@ -96,7 +96,7 @@ const wConfig = {
     rules: [
       {
         test: /\.jsx?$/,
-        exclude: (file) => /node_modules/.test(file) && !/\.vue\.js/.test(file),
+        // exclude: (file) => /node_modules/.test(file) && !/\.vue\.js/.test(file),
         use: (() => {
           const loaders = [
             {
@@ -106,7 +106,16 @@ const wConfig = {
                   return {
                     babelrc: false,
                     cacheDirectory: true,
-                    presets: ['@babel/preset-react']
+                    presets: ['@babel/preset-react'],
+                     plugins: [
+                      ['@babel/plugin-proposal-decorators', { legacy: true }],
+                      ['@babel/plugin-proposal-class-properties', { loose: true }],
+                      '@babel/plugin-proposal-function-sent',
+                      '@babel/plugin-proposal-export-namespace-from',
+                      '@babel/plugin-proposal-numeric-separator',
+                      '@babel/plugin-proposal-throw-expressions',
+                      '@babel/plugin-syntax-dynamic-import'
+                    ]
                   }
                 } else {
                   return {}
@@ -288,9 +297,10 @@ wConfig.plugins = wConfig.plugins.concat(
 // + dev server
 wConfig.devServer = {
   contentBase: config.alias.root,
+  injectClient: false,
   compress: true,
   port: config.proxy.port,
-  hot: true,
+  hot: false,
   publicPath: config.dest.basePath,
   writeToDisk: true,
   async after() {

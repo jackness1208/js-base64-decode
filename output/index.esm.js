@@ -31,14 +31,14 @@ function __awaiter(thisArg, _arguments, P, generator) {
 }
 
 function __generator(thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    var _ = { label: 0, sent: function() { if (t[0] & 1) { throw t[1]; } return t[1]; }, trys: [], ops: [] }, f, y, t, g;
     return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [op[0] & 2, t.value];
+        if (f) { throw new TypeError("Generator is already executing."); }
+        while (_) { try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) { return t; }
+            if (y = 0, t) { op = [op[0] & 2, t.value]; }
             switch (op[0]) {
                 case 0: case 1: t = op; break;
                 case 4: _.label++; return { value: op[1], done: false };
@@ -49,12 +49,12 @@ function __generator(thisArg, body) {
                     if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
                     if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
                     if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
+                    if (t[2]) { _.ops.pop(); }
                     _.trys.pop(); continue;
             }
             op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; } }
+        if (op[0] & 5) { throw op[1]; } return { value: op[0] ? op[1] : void 0, done: true };
     }
 }
 
@@ -69,28 +69,32 @@ function __generator(thisArg, body) {
  *
  * @author Dan Kogai (https://github.com/dankogai)
  */
-const _hasatob = typeof atob === 'function';
-const _hasBuffer = typeof Buffer === 'function';
-const _TD = typeof TextDecoder === 'function' ? new TextDecoder() : undefined;
-const _TE = typeof TextEncoder === 'function' ? new TextEncoder() : undefined;
-const b64ch = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-const b64chs = [...b64ch];
-const b64tab = ((a) => {
-    let tab = {};
-    a.forEach((c, i) => tab[c] = i);
+var _hasatob = typeof atob === 'function';
+var _hasBuffer = typeof Buffer === 'function';
+var _TD = typeof TextDecoder === 'function' ? new TextDecoder() : undefined;
+var _TE = typeof TextEncoder === 'function' ? new TextEncoder() : undefined;
+var b64ch = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+var b64chs = [].concat( b64ch );
+var b64tab = (function (a) {
+    var tab = {};
+    a.forEach(function (c, i) { return tab[c] = i; });
     return tab;
 })(b64chs);
-const b64re = /^(?:[A-Za-z\d+\/]{4})*?(?:[A-Za-z\d+\/]{2}(?:==)?|[A-Za-z\d+\/]{3}=?)?$/;
-const _fromCC = String.fromCharCode.bind(String);
-const _U8Afrom = typeof Uint8Array.from === 'function'
+var b64re = /^(?:[A-Za-z\d+\/]{4})*?(?:[A-Za-z\d+\/]{2}(?:==)?|[A-Za-z\d+\/]{3}=?)?$/;
+var _fromCC = String.fromCharCode.bind(String);
+var _U8Afrom = typeof Uint8Array.from === 'function'
     ? Uint8Array.from.bind(Uint8Array)
-    : (it, fn = (x) => x) => new Uint8Array(Array.prototype.slice.call(it, 0).map(fn));
-const _tidyB64 = (s) => s.replace(/[^A-Za-z0-9\+\/]/g, '');
+    : function (it, fn) {
+      if ( fn === void 0 ) fn = function (x) { return x; };
+
+      return new Uint8Array(Array.prototype.slice.call(it, 0).map(fn));
+};
+var _tidyB64 = function (s) { return s.replace(/[^A-Za-z0-9\+\/]/g, ''); };
 // This trick is found broken https://github.com/dankogai/js-base64/issues/130
 // const btou = (src: string) => decodeURIComponent(escape(src));
 // reverting good old fationed regexp
-const re_btou = /[\xC0-\xDF][\x80-\xBF]|[\xE0-\xEF][\x80-\xBF]{2}|[\xF0-\xF7][\x80-\xBF]{3}/g;
-const cb_btou = (cccc) => {
+var re_btou = /[\xC0-\xDF][\x80-\xBF]|[\xE0-\xEF][\x80-\xBF]{2}|[\xF0-\xF7][\x80-\xBF]{3}/g;
+var cb_btou = function (cccc) {
     switch (cccc.length) {
         case 4:
             var cp = ((0x07 & cccc.charCodeAt(0)) << 18)
@@ -113,18 +117,18 @@ const cb_btou = (cccc) => {
  * @param {string} src UTF-16 string
  * @returns {string} UTF-8 string
  */
-const btou = (b) => b.replace(re_btou, cb_btou);
+var btou = function (b) { return b.replace(re_btou, cb_btou); };
 /**
  * polyfill version of `atob`
  */
-const atobPolyfill = (asc) => {
+var atobPolyfill = function (asc) {
     // console.log('polyfilled');
     asc = asc.replace(/\s+/g, '');
     if (!b64re.test(asc))
-        throw new TypeError('malformed base64.');
+        { throw new TypeError('malformed base64.'); }
     asc += '=='.slice(2 - (asc.length & 3));
-    let u24, bin = '', r1, r2;
-    for (let i = 0; i < asc.length;) {
+    var u24, bin = '', r1, r2;
+    for (var i = 0; i < asc.length;) {
         u24 = b64tab[asc.charAt(i++)] << 18
             | b64tab[asc.charAt(i++)] << 12
             | (r1 = b64tab[asc.charAt(i++)]) << 6
@@ -140,34 +144,33 @@ const atobPolyfill = (asc) => {
  * @param {String} asc Base64-encoded string
  * @returns {string} binary string
  */
-const _atob = _hasatob ? (asc) => atob(_tidyB64(asc))
-    : _hasBuffer ? (asc) => Buffer.from(asc, 'base64').toString('binary')
+var _atob = _hasatob ? function (asc) { return atob(_tidyB64(asc)); }
+    : _hasBuffer ? function (asc) { return Buffer.from(asc, 'base64').toString('binary'); }
         : atobPolyfill;
 //
-const _toUint8Array = _hasBuffer
-    ? (a) => _U8Afrom(Buffer.from(a, 'base64'))
-    : (a) => _U8Afrom(_atob(a), c => c.charCodeAt(0));
+var _toUint8Array = _hasBuffer
+    ? function (a) { return _U8Afrom(Buffer.from(a, 'base64')); }
+    : function (a) { return _U8Afrom(_atob(a), function (c) { return c.charCodeAt(0); }); };
 //
-const _decode = _hasBuffer
-    ? (a) => Buffer.from(a, 'base64').toString('utf8')
+var _decode = _hasBuffer
+    ? function (a) { return Buffer.from(a, 'base64').toString('utf8'); }
     : _TD
-        ? (a) => _TD.decode(_toUint8Array(a))
-        : (a) => btou(_atob(a));
-const _unURI = (a) => _tidyB64(a.replace(/[-_]/g, (m0) => m0 == '-' ? '+' : '/'));
+        ? function (a) { return _TD.decode(_toUint8Array(a)); }
+        : function (a) { return btou(_atob(a)); };
+var _unURI = function (a) { return _tidyB64(a.replace(/[-_]/g, function (m0) { return m0 == '-' ? '+' : '/'; })); };
 /**
  * converts a Base64 string to a UTF-8 string.
  * @param {String} src Base64 string.  Both normal and URL-safe are supported
  * @returns {string} UTF-8 string
  */
-const decode = (src) => _decode(_unURI(src));
+var decode = function (src) { return _decode(_unURI(src)); };
 
-// eslint-disable-next-line no-useless-escape
-var workerString = "\"use strict\";const e=\"function\"==typeof atob,r=\"function\"==typeof Buffer,t=\"function\"==typeof TextDecoder?new TextDecoder:void 0,a=(\"function\"==typeof TextEncoder&&new TextEncoder,[...\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=\"]),o=(e=>{let r={};return a.forEach((e,t)=>r[e]=t),r})(),n=/^(?:[A-Za-zd+/]{4})*?(?:[A-Za-zd+/]{2}(?:==)?|[A-Za-zd+/]{3}=?)?$/,c=String.fromCharCode.bind(String),f=\"function\"==typeof Uint8Array.from?Uint8Array.from.bind(Uint8Array):(e,r=(e=>e))=>new Uint8Array(Array.prototype.slice.call(e,0).map(r)),d=e=>e.replace(/[^A-Za-z0-9+/]/g,\"\"),i=/[\u00C0-\u00DF][\u0080-\u00BF]|[\u00E0-\u00EF][\u0080-\u00BF]{2}|[\u00F0-\u00F7][\u0080-\u00BF]{3}/g,A=e=>{switch(e.length){case 4:var r=((7&e.charCodeAt(0))<<18|(63&e.charCodeAt(1))<<12|(63&e.charCodeAt(2))<<6|63&e.charCodeAt(3))-65536;return c(55296+(r>>>10))+c(56320+(1023&r));case 3:return c((15&e.charCodeAt(0))<<12|(63&e.charCodeAt(1))<<6|63&e.charCodeAt(2));default:return c((31&e.charCodeAt(0))<<6|63&e.charCodeAt(1))}},h=e?e=>atob(d(e)):r?e=>Buffer.from(e,\"base64\").toString(\"binary\"):e=>{if(e=e.replace(/s+/g,\"\"),!n.test(e))throw new TypeError(\"malformed base64.\");e+=\"==\".slice(2-(3&e.length));let r,t,a,f=\"\";for(let n=0;n<e.length;)r=o[e.charAt(n++)]<<18|o[e.charAt(n++)]<<12|(t=o[e.charAt(n++)])<<6|(a=o[e.charAt(n++)]),f+=64===t?c(r>>16&255):64===a?c(r>>16&255,r>>8&255):c(r>>16&255,r>>8&255,255&r);return f},s=r?e=>f(Buffer.from(e,\"base64\")):e=>f(h(e),e=>e.charCodeAt(0)),u=r?e=>Buffer.from(e,\"base64\").toString(\"utf8\"):t?e=>t.decode(s(e)):e=>h(e).replace(i,A);var l=self;l.addEventListener(\"message\",(function(e){var r;l.postMessage((r=e.data,u(d(r.replace(/[-_]/g,e=>\"-\"==e?\"+\":\"/\")))))}));\n";
+var workerString = "\n\"use strict\";var r,t=\"function\"==typeof atob,e=\"function\"==typeof Buffer,n=\"function\"==typeof TextDecoder?new TextDecoder:void 0,o=(\"function\"==typeof TextEncoder&&new TextEncoder,[].concat(\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=\")),c=(r={},o.forEach((function(t,e){return r[t]=e})),r),a=/^(?:[A-Za-zd+/]{4})*?(?:[A-Za-zd+/]{2}(?:==)?|[A-Za-zd+/]{3}=?)?$/,f=String.fromCharCode.bind(String),u=\"function\"==typeof Uint8Array.from?Uint8Array.from.bind(Uint8Array):function(r,t){return void 0===t&&(t=function(r){return r}),new Uint8Array(Array.prototype.slice.call(r,0).map(t))},i=function(r){return r.replace(/[^A-Za-z0-9+/]/g,\"\")},d=/[\u00C0-\u00DF][\u0080-\u00BF]|[\u00E0-\u00EF][\u0080-\u00BF]{2}|[\u00F0-\u00F7][\u0080-\u00BF]{3}/g,A=function(r){switch(r.length){case 4:var t=((7&r.charCodeAt(0))<<18|(63&r.charCodeAt(1))<<12|(63&r.charCodeAt(2))<<6|63&r.charCodeAt(3))-65536;return f(55296+(t>>>10))+f(56320+(1023&t));case 3:return f((15&r.charCodeAt(0))<<12|(63&r.charCodeAt(1))<<6|63&r.charCodeAt(2));default:return f((31&r.charCodeAt(0))<<6|63&r.charCodeAt(1))}},h=t?function(r){return atob(i(r))}:e?function(r){return Buffer.from(r,\"base64\").toString(\"binary\")}:function(r){if(r=r.replace(/s+/g,\"\"),!a.test(r))throw new TypeError(\"malformed base64.\");r+=\"==\".slice(2-(3&r.length));for(var t,e,n,o=\"\",u=0;u<r.length;)t=c[r.charAt(u++)]<<18|c[r.charAt(u++)]<<12|(e=c[r.charAt(u++)])<<6|(n=c[r.charAt(u++)]),o+=64===e?f(t>>16&255):64===n?f(t>>16&255,t>>8&255):f(t>>16&255,t>>8&255,255&t);return o},s=e?function(r){return u(Buffer.from(r,\"base64\"))}:function(r){return u(h(r),(function(r){return r.charCodeAt(0)}))},x=e?function(r){return Buffer.from(r,\"base64\").toString(\"utf8\")}:n?function(r){return n.decode(s(r))}:function(r){return h(r).replace(d,A)},l=self;l.addEventListener(\"message\",(function(r){var t;l.postMessage((t=r.data,x(i(t.replace(/[-_]/g,(function(r){return\"-\"==r?\"+\":\"/\"}))))))}));\n";
 var WOEKER_SUPPORTED = typeof Worker !== 'undefined' && typeof URL !== 'undefined';
 var Base64 = /** @class */ (function () {
     function Base64(option) {
         /** webdb 名称 */
-        this.webdb = 'base64-decode';
+        this.webdb = { name: 'base64-decode' };
         /** 是否需要转 json */
         this.json = true;
         var webdb = option.webdb, json = option.json;
@@ -177,7 +180,7 @@ var Base64 = /** @class */ (function () {
         if (json !== undefined) {
             this.json = json;
         }
-        this.storage = new IndexDBStorage({ name: this.webdb });
+        this.storage = new IndexDBStorage({ name: this.webdb.name });
         if (WOEKER_SUPPORTED) {
             this.worker = new Worker(URL.createObjectURL(new Blob([workerString], { type: 'application/javascript' })), {
                 name: 'base64-decode'
@@ -196,10 +199,10 @@ var Base64 = /** @class */ (function () {
                         return [4 /*yield*/, ((_a = this.storage) === null || _a === void 0 ? void 0 : _a.getItem(ctx))];
                     case 1:
                         r = _d.sent();
-                        if (!r) return [3 /*break*/, 2];
+                        if (!r) { return [3 /*break*/, 2]; }
                         return [2 /*return*/, r];
                     case 2:
-                        if (!this.worker) return [3 /*break*/, 5];
+                        if (!this.worker) { return [3 /*break*/, 5]; }
                         return [4 /*yield*/, new Promise(function (resolve, reject) {
                                 if (_this.worker) {
                                     _this.worker.onmessage = function (e) {
