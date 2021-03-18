@@ -1,6 +1,6 @@
 /*!
- * js-base64-decode esm 0.1.2
- * (c) 2020 - 2020 jackness
+ * js-base64-decode esm 0.2.1
+ * (c) 2020 - 2021 jackness
  * Released under the MIT License.
  */
 import { IndexDBStorage } from 'indexdb-storage';
@@ -164,6 +164,16 @@ var _unURI = function (a) { return _tidyB64(a.replace(/[-_]/g, function (m0) { r
  * @returns {string} UTF-8 string
  */
 var decode = function (src) { return _decode(_unURI(src)); };
+/**
+ * check if a value is a valid Base64 string
+ * @param {String} src a value to check
+  */
+var isValid = function (src) {
+    if (typeof src !== 'string')
+        { return false; }
+    var s = src.replace(/\s+/g, '').replace(/=+$/, '');
+    return !/[^\s0-9a-zA-Z\+/]/.test(s) || !/[^\s0-9a-zA-Z\-_]/.test(s);
+};
 
 var workerString = "\n\"use strict\";var r,t=\"function\"==typeof atob,e=\"function\"==typeof Buffer,n=\"function\"==typeof TextDecoder?new TextDecoder:void 0,o=(\"function\"==typeof TextEncoder&&new TextEncoder,[].concat(\"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=\")),c=(r={},o.forEach((function(t,e){return r[t]=e})),r),a=/^(?:[A-Za-zd+/]{4})*?(?:[A-Za-zd+/]{2}(?:==)?|[A-Za-zd+/]{3}=?)?$/,f=String.fromCharCode.bind(String),u=\"function\"==typeof Uint8Array.from?Uint8Array.from.bind(Uint8Array):function(r,t){return void 0===t&&(t=function(r){return r}),new Uint8Array(Array.prototype.slice.call(r,0).map(t))},i=function(r){return r.replace(/[^A-Za-z0-9+/]/g,\"\")},d=/[\u00C0-\u00DF][\u0080-\u00BF]|[\u00E0-\u00EF][\u0080-\u00BF]{2}|[\u00F0-\u00F7][\u0080-\u00BF]{3}/g,A=function(r){switch(r.length){case 4:var t=((7&r.charCodeAt(0))<<18|(63&r.charCodeAt(1))<<12|(63&r.charCodeAt(2))<<6|63&r.charCodeAt(3))-65536;return f(55296+(t>>>10))+f(56320+(1023&t));case 3:return f((15&r.charCodeAt(0))<<12|(63&r.charCodeAt(1))<<6|63&r.charCodeAt(2));default:return f((31&r.charCodeAt(0))<<6|63&r.charCodeAt(1))}},h=t?function(r){return atob(i(r))}:e?function(r){return Buffer.from(r,\"base64\").toString(\"binary\")}:function(r){if(r=r.replace(/s+/g,\"\"),!a.test(r))throw new TypeError(\"malformed base64.\");r+=\"==\".slice(2-(3&r.length));for(var t,e,n,o=\"\",u=0;u<r.length;)t=c[r.charAt(u++)]<<18|c[r.charAt(u++)]<<12|(e=c[r.charAt(u++)])<<6|(n=c[r.charAt(u++)]),o+=64===e?f(t>>16&255):64===n?f(t>>16&255,t>>8&255):f(t>>16&255,t>>8&255,255&t);return o},s=e?function(r){return u(Buffer.from(r,\"base64\"))}:function(r){return u(h(r),(function(r){return r.charCodeAt(0)}))},x=e?function(r){return Buffer.from(r,\"base64\").toString(\"utf8\")}:n?function(r){return n.decode(s(r))}:function(r){return h(r).replace(d,A)},l=self;l.addEventListener(\"message\",(function(r){var t;l.postMessage((t=r.data,x(i(t.replace(/[-_]/g,(function(r){return\"-\"==r?\"+\":\"/\"}))))))}));\n";
 var WOEKER_SUPPORTED = typeof Worker !== 'undefined' && typeof URL !== 'undefined';
@@ -187,6 +197,9 @@ var Base64 = /** @class */ (function () {
             });
         }
     }
+    Base64.prototype.isValid = function (ctx) {
+        return isValid(ctx);
+    };
     Base64.prototype.decode = function (ctx) {
         var _a, _b, _c;
         return __awaiter(this, void 0, void 0, function () {
@@ -240,4 +253,4 @@ var Base64 = /** @class */ (function () {
     return Base64;
 }());
 
-export { Base64 };
+export { Base64, decode, isValid };
