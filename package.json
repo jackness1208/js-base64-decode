@@ -57,7 +57,7 @@
   "name": "js-base64-decode",
   "description": "base64 decode with webdb and webworker",
   "repository": "https://github.com/jackness1208/js-base64-decode.git",
-  "author": "liudaojie <liudaojie@yy.com>",
+  "author": "jackness1208",
   "license": "MIT",
   "dependencies": {
     "indexdb-storage": "^0.1.1"
