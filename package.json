@@ -1,5 +1,5 @@
 {
-  "version": "0.2.2",
+  "version": "0.2.3",
   "main": "output/index.js",
   "module": "output/index.esm.js",
   "types": "output/index.d.ts",
@@ -38,11 +38,12 @@
     "install:test": "cd ./test/case/base && yarn install"
   },
   "devDependencies": {
-    "@rollup/plugin-replace": "^2.3.4",
     "@rollup/plugin-buble": "^0.21.3",
+    "@rollup/plugin-replace": "^2.3.4",
     "cross-env": "^5.2.0",
     "eslint": "^6.8.0",
     "eslint-config-yyl-react": "^0.1.9",
+    "js-base64": "^3.6.0",
     "prettier": "^2.0.4",
     "rollup": "^1.9.0",
     "rollup-plugin-commonjs": "^9.3.4",
@@ -51,8 +52,7 @@
     "rollup-plugin-terser": "^5.3.0",
     "rollup-plugin-typescript2": "^0.20.1",
     "typescript": "^3.8.3",
-    "yyl-release": "0.1.0",
-    "js-base64": "^3.6.0"
+    "yyl-release": "0.1.0"
   },
   "name": "js-base64-decode",
   "description": "base64 decode with webdb and webworker",
@@ -60,6 +60,7 @@
   "author": "jackness1208",
   "license": "MIT",
   "dependencies": {
+    "@types/js-base64": "^3.3.1",
     "indexdb-storage": "^0.1.1"
   }
 }
