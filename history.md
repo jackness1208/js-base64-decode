@@ -1,5 +1,9 @@
 # 版本变更
 
+## 0.2.2 (2021-09-17)
+
+- feat: 把 js-base64 所有 内容导出
+
 ## 0.2.1 (2021-03-18)
 
 - feat: 把 js-base64 decode, isVaid export 出去

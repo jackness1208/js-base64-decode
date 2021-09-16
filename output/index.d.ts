@@ -1,5 +1,5 @@
 import { IndexDBStorageOption } from 'indexdb-storage';
-export { decode, isValid } from 'js-base64';
+export * from 'js-base64';
 export interface Base64Option {
     /** webdb 名称 */
     webdb?: IndexDBStorageOption;
