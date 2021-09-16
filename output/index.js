@@ -1,5 +1,5 @@
 /*!
- * js-base64-decode cjs 0.2.2
+ * js-base64-decode cjs 0.2.3
  * (c) 2020 - 2021 jackness
  * Released under the MIT License.
  */

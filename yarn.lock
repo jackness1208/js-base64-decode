@@ -141,6 +141,13 @@
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
   integrity sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==
 
+"@types/js-base64@^3.3.1":
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/@types/js-base64/-/js-base64-3.3.1.tgz#36c2d6dc126277ea28a4d0599d0cafbf547b51e6"
+  integrity sha512-Zw33oQNAvDdAN9b0IE5stH0y2MylYvtU7VVTKEJPxhyM2q57CVaNJhtJW258ah24NRtaiA23tptUmVn3dmTKpw==
+  dependencies:
+    js-base64 "*"
+
 "@types/json-schema@^7.0.3":
   version "7.0.6"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.6.tgz#f4c7ec43e81b319a9815115031709f26987891f0"
@@ -1571,6 +1578,11 @@ jest-worker@^24.9.0:
   dependencies:
     merge-stream "^2.0.0"
     supports-color "^6.1.0"
+
+js-base64@*:
+  version "3.7.1"
+  resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-3.7.1.tgz#d5fa3ee5fe56a49db871516e70b0474238efcc68"
+  integrity sha512-XyYXEUTP3ykPPnGPoesMr4yBygopit99iXW52yT1EWrkzwzvtAor/pbf+EBuDkwqSty7K10LeTjCkUn8c166aQ==
 
 js-base64@^3.6.0:
   version "3.6.0"
